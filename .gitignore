@@ -1,0 +1,7 @@
+frontend-repo/node_modules/
+frontend-repo/dist/
+frontend-repo/build
+
+backend-repo/node_modules/
+backend-repo/dist/
+backend-repo/build
