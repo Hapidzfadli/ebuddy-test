@@ -24,6 +24,7 @@ export const updateUser = async(userId: string, userData : Partial<User>) : Prom
         const updatedData = {
           ...userData,
           updatedAt: now,
+          recentlyActive: now
         };
 
         await db.collection(COLLECTION_NAME).doc(userId).update(updatedData);

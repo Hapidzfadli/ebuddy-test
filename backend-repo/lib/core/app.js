@@ -12,7 +12,7 @@ app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 // Routes
-app.use('/api', userRoutes_1.default);
+app.use('/', userRoutes_1.default);
 // Root route
 app.get('/', (_req, res) => {
     res.send('EBUDDY Backend API is running!');

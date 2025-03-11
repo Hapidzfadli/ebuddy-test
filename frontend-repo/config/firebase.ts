@@ -1,3 +1,4 @@
+// config/firebase.ts
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
@@ -12,10 +13,11 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID
 };
 
-// Initialize Firebase
+// Initialize Firebase app first
 const app = initializeApp(firebaseConfig);
+
+// Then initialize services
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
 
 export default app;

@@ -9,7 +9,7 @@ import { store } from '../store';
 import theme from '../theme';
 import { auth } from '../config/firebase';
 import { loginSuccess, logout } from '../store/slices/authSlice';
-import { connectToEmulators } from '../config/emulator';
+
 interface ProvidersProps {
   children: ReactNode;
 }
@@ -32,13 +32,6 @@ export default function Providers({ children }: ProvidersProps) {
     });
 
     return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    // Connect to Firebase emulators in development
-    if (process.env.NODE_ENV === 'development') {
-      connectToEmulators();
-    }
   }, []);
 
   if (loading) {

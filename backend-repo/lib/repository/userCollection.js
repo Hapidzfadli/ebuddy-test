@@ -23,6 +23,7 @@ const updateUser = async (userId, userData) => {
         const updatedData = {
             ...userData,
             updatedAt: now,
+            recentlyActive: now
         };
         await firebaseConfig_1.db.collection(COLLECTION_NAME).doc(userId).update(updatedData);
         const updatedUser = await (0, exports.getUserById)(userId);

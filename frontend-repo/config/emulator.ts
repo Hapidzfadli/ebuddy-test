@@ -1,3 +1,4 @@
+// config/emulator.ts
 import { connectAuthEmulator } from 'firebase/auth';
 import { connectFirestoreEmulator } from 'firebase/firestore';
 import { auth, db } from './firebase';

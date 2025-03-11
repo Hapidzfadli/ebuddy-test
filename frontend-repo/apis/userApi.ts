@@ -1,5 +1,9 @@
-// apis/userApi.ts
 import axiosInstance from './axiosInstance';
+
+export interface FirestoreTimestamp {
+  _seconds: number;
+  _nanoseconds: number;
+}
 
 export interface User {
   id?: string;
@@ -7,9 +11,9 @@ export interface User {
   email?: string;
   totalAverageWeightRatings?: number;
   numberOfRents?: number;
-  recentlyActive?: number;
-  createdAt?: number;
-  updatedAt?: number;
+  recentlyActive?: FirestoreTimestamp | number;
+  createdAt?: FirestoreTimestamp | number;
+  updatedAt?: FirestoreTimestamp | number;
 }
 
 export const fetchUserData = async (userId?: string) => {
@@ -30,5 +34,14 @@ export const updateUserData = async (userId: string, userData: Partial<User>) =>
   } catch (error) {
     console.error('Error updating user data:', error);
     throw error;
+  }
+};
+
+export const updateUserActivity = async (userId: string) => {
+  try {
+    await axiosInstance.put(`/update-user-data/${userId}`, {});
+    console.log('User activity timestamp updated');
+  } catch (error) {
+    console.error('Error updating user activity:', error);
   }
 };
