@@ -1,5 +1,6 @@
 frontend-repo/node_modules/
 frontend-repo/dist/
+frontend-repo/.next
 frontend-repo/build
 
 backend-repo/node_modules/
