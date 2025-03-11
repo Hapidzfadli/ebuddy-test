@@ -1,5 +1,40 @@
-import * as admin from "firebase-admin"
-
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.auth = exports.db = void 0;
+const admin = __importStar(require("firebase-admin"));
 const serviceAccount = {
     type: "service_account",
     project_id: "ebuddy-project-e87d0",
@@ -13,16 +48,13 @@ const serviceAccount = {
     client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-fbsvc%40ebuddy-project-e87d0.iam.gserviceaccount.com",
     universe_domain: "googleapis.com"
 };
-
 // Check if running in emulator
 const FIREBASE_EMULATOR = process.env.FUNCTIONS_EMULATOR === 'true';
-
 if (!admin.apps.length) {
     // Configure firebase differently based on environment
     if (FIREBASE_EMULATOR) {
         // For emulator, use a minimal config
         admin.initializeApp();
-        
         // If using Firestore emulator, configure it
         if (process.env.FIRESTORE_EMULATOR_HOST) {
             admin.firestore().settings({
@@ -30,17 +62,15 @@ if (!admin.apps.length) {
                 ssl: false
             });
         }
-    } else {
+    }
+    else {
         // For production, use the service account
         admin.initializeApp({
-            credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+            credential: admin.credential.cert(serviceAccount),
             databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`
         });
     }
 }
-
-
-export const db = admin.firestore();
-export const auth = admin.auth();
-
-export default admin;
+exports.db = admin.firestore();
+exports.auth = admin.auth();
+exports.default = admin;
