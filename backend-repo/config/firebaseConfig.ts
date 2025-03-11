@@ -16,7 +16,6 @@ const serviceAccount = {
     client_x509_cert_url: process.env.FIREBASE_CLIENT_X509_CERT_URL
 };
 
-
 if (!admin.apps.length) {
     admin.initializeApp({
         credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
@@ -26,12 +25,5 @@ if (!admin.apps.length) {
 
 export const db = admin.firestore();
 export const auth = admin.auth();
-
-if (process.env.NODE_ENV === 'development') {
-    db.settings({
-        host: 'localhost:8080',
-        ssl: false
-    });
-}
 
 export default admin;
